@@ -1,7 +1,9 @@
 package org.example.api
 
+import com.google.gson.Gson
 import org.example.DAYS_NUMBER
 import org.example.KEY
+import org.example.models.ErrorResponse
 import org.example.models.ForecastResponse
 import org.example.objects.RetrofitProvider
 import retrofit2.Response
@@ -21,7 +23,10 @@ suspend fun getForecast(city: String, forecastDate: String, hour: Int) : Forecas
         else
         {
             // in case of error code other than 200, print http code
-            println("HTTP Code: ${response.code()}")
+            val errorBodyString = response.errorBody()?.string()
+            val errorResponse = Gson().fromJson(errorBodyString, ErrorResponse::class.java).error
+            println("HTTP Code: ${response.code()} -> Inner Error Code: " +
+                "${errorResponse.code} -> Message: ${errorResponse.message}")
             return null
         }
     }

@@ -20,7 +20,7 @@ fun buildTable(results: List<ForecastResponse?>) : Table {
             defaultAlignment = Table.Hints.Alignment.CENTER
             precision(MIN_TEMPERATURE, 2)
             precision(MAX_TEMPERATURE, 2)
-            precision(HUMIDITY, 2)
+            precision(WIND_SPEED, 2)
             borderStyle = Table.BorderStyle.SINGLE_LINE
         }
     }
