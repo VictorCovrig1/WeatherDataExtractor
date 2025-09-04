@@ -22,7 +22,7 @@ suspend fun getForecast(city: String, forecastDate: String, hour: Int) : Forecas
             return response.body()
         else
         {
-            // in case of error code other than 200, print http code
+            // in case of error code other than 200, print http code, inner error code and message
             val errorBodyString = response.errorBody()?.string()
             val errorResponse = Gson().fromJson(errorBodyString, ErrorResponse::class.java).error
             println("HTTP Code: ${response.code()} -> Inner Error Code: " +
